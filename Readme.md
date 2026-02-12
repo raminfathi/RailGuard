@@ -10,7 +10,6 @@
 ---
 
 ## 📸 Interface Visuals
-
 <table>
   <tr>
     <td align="center" width="100%">
@@ -19,10 +18,8 @@
       <br>
       <em>Android Optimized View</em>
     </td>
-
   </tr>
 </table>
-
 ---
 
 ## ✨ Core Features
