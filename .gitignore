@@ -1,0 +1,23 @@
+# Binaries
+*.exe
+*.dll
+*.so
+*.dylib
+*.apk
+*.aab
+
+# Output folder for builds
+fyne-cross/
+bin/
+
+# Database (We don't want to upload real data)
+*.db
+*.db-journal
+
+# IDEs
+.vscode/
+.idea/
+
+# OS specific
+.DS_Store
+Thumbs.db
