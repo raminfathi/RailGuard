@@ -47,27 +47,29 @@ func decodeWagonInfo(numStr string) string {
 	return info
 }
 
-// Creates the visual guide for the train strip
 func (a *App) makeLegend() fyne.CanvasObject {
 	makeItem := func(c color.Color, text string) fyne.CanvasObject {
 		rect := canvas.NewRectangle(c)
-		rect.SetMinSize(fyne.NewSize(20, 20))
+		rect.SetMinSize(fyne.NewSize(14, 14)) // سایز مربع رنگی
 		return container.NewHBox(rect, widget.NewLabel(text))
 	}
 
-	silverColor := color.RGBA{R: 200, G: 200, B: 200, A: 255}
-	blueColor := color.RGBA{R: 0, G: 120, B: 215, A: 255}
-
-	return container.NewHBox(
-		widget.NewLabelWithStyle("Legend:", fyne.TextAlignLeading, fyne.TextStyle{Bold: true}),
-		layout.NewSpacer(),
+	// ردیف اول راهنما
+	row1 := container.NewHBox(
 		makeItem(theme.SuccessColor(), "Loco"),
-		makeItem(theme.ErrorColor(), "Danger"),
-		makeItem(theme.WarningColor(), "Brake Defect"),
-		makeItem(silverColor, "Empty Wagon"),
-		makeItem(blueColor, "Loaded Wagon"),
 		layout.NewSpacer(),
+		makeItem(theme.ErrorColor(), "Danger"),
+		layout.NewSpacer(),
+		makeItem(theme.WarningColor(), "Brake"),
 	)
+	// ردیف دوم راهنما
+	row2 := container.NewHBox(
+		makeItem(color.RGBA{R: 200, G: 200, B: 200, A: 255}, "Empty"),
+		layout.NewSpacer(),
+		makeItem(color.RGBA{R: 0, G: 120, B: 215, A: 255}, "Loaded"),
+	)
+
+	return container.NewVBox(row1, row2)
 }
 
 func (a *App) makeDashboard() fyne.CanvasObject {
@@ -330,12 +332,11 @@ Wheel: %.0f mm | Pivot Dist: %.2f m`,
 		visualScroll,
 		widget.NewSeparator(),
 		// Arrange buttons nicely
-		container.NewHBox(
+		container.NewGridWithColumns(2,
 			historyBtn,
-			layout.NewSpacer(),
-			calcBtn,
-			layout.NewSpacer(),
-			saveBtn, pdfBtn, // Group Save and PDF together
+			saveBtn,
+			pdfBtn,
+			calcBtn, // دکمه محاسبه را پایین‌تر یا شاخص‌تر می‌گذاریم
 		),
 	)
 

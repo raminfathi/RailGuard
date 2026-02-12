@@ -60,7 +60,7 @@ func (m MyTheme) Font(style fyne.TextStyle) fyne.Resource {
 
 func (m MyTheme) Size(name fyne.ThemeSizeName) float32 {
 	if name == theme.SizeNameText {
-		return 13
+		return 11
 	}
 	return theme.DefaultTheme().Size(name)
 }
